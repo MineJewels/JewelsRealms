@@ -98,9 +98,9 @@ public class RealmLoader {
         final Location spawnLocation = world.getSpawnLocation().add(0.5, 0, 0.5);
         final Location playerSpawnLocation = new Location(
                 world,
-                this.plugin.getSettingsConfig().getInt("spawn-location.x"),
+                this.plugin.getSettingsConfig().getInt("spawn-location.x") + 0.5,
                 this.plugin.getSettingsConfig().getInt("spawn-location.y"),
-                this.plugin.getSettingsConfig().getInt("spawn-location.z")
+                this.plugin.getSettingsConfig().getInt("spawn-location.z") + 0.5
         );
 
         WorldBorder border = world.getWorldBorder();
