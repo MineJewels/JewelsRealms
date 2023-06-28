@@ -67,7 +67,6 @@ public class RealmLoader {
     @SneakyThrows
     public void deleteRealm(final Realm realm) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "swm unload " + realm.getOwnerName() + "-" + realm.getId());
-        this.deleteWorld(this.adapt(realm).getWorldFolder());
     }
 
     public World adapt(final SlimeWorld world) {
@@ -76,20 +75,6 @@ public class RealmLoader {
 
     public World adapt(final Realm realm) {
         return Bukkit.getWorld(realm.getOwnerName() + "-" + realm.getId());
-    }
-
-    public void spawn(final Realm realm, final Player player) {
-
-        final World world = this.adapt(realm);
-
-        final Location playerSpawnLocation = new Location(
-                world,
-                this.plugin.getSettingsConfig().getInt("spawn-location.x"),
-                this.plugin.getSettingsConfig().getInt("spawn-location.y"),
-                this.plugin.getSettingsConfig().getInt("spawn-location.z")
-        );
-
-        player.teleport(playerSpawnLocation);
     }
 
     public void createRealmProperties(final SlimeWorld slimeWorld, final Player player) {
@@ -111,19 +96,5 @@ public class RealmLoader {
         FaweUtils.get().pasteSchematic(spawnLocation, Files.file("realm.schem", plugin), true);
 
         player.teleport(playerSpawnLocation);
-    }
-
-    private boolean deleteWorld(final File path) {
-        if(path.exists()) {
-            File files[] = path.listFiles();
-            for(int i=0; i<files.length; i++) {
-                if(files[i].isDirectory()) {
-                    deleteWorld(files[i]);
-                } else {
-                    files[i].delete();
-                }
-            }
-        }
-        return(path.delete());
     }
 }

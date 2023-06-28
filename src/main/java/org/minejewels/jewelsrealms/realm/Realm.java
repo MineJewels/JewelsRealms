@@ -3,7 +3,9 @@ package org.minejewels.jewelsrealms.realm;
 import com.infernalsuite.aswm.api.world.SlimeWorld;
 import lombok.Getter;
 import lombok.Setter;
+import net.abyssdev.abysslib.placeholder.PlaceholderReplacer;
 import net.abyssdev.abysslib.storage.id.Id;
+import net.abyssdev.abysslib.text.message.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,7 +28,7 @@ public class Realm {
     private final int id;
     private final Map<UUID, RealmRole> members = Maps.mutable.empty();
 
-    private boolean open;
+    private boolean open = true;
     private String description = "N/A";
 
     public Realm(final JewelsRealms plugin, final UUID owner) {
@@ -90,5 +92,23 @@ public class Realm {
         );
 
         player.teleport(playerSpawnLocation);
+    }
+
+    public void sendTeamMessage(final Message message, final PlaceholderReplacer replacer) {
+
+        final Player owner = Bukkit.getPlayer(this.getOwner());
+
+        message.send(owner, replacer);
+
+        this.members.keySet().forEach(member -> {
+
+            final Player player = Bukkit.getPlayer(member);
+
+            assert player != null;
+
+            if (!player.isOnline()) return;
+
+            message.send(player, replacer);
+        });
     }
 }

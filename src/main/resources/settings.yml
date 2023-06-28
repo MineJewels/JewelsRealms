@@ -2,3 +2,7 @@ spawn-location:
   x: -11
   y: 85
   z: 15
+
+status:
+  locked: "&c&lLOCKED"
+  unlocked: "&a&lUNLOCKED"

@@ -17,8 +17,13 @@ import java.util.UUID;
 
 public class RealmWhoisCommand extends AbyssSubCommand<JewelsRealms> {
 
+    private final String locked, unlocked;
+
     public RealmWhoisCommand(JewelsRealms plugin) {
         super(plugin, 0, Sets.immutable.of("whois", "who", "info"));
+
+        this.locked = plugin.getSettingsConfig().getColoredString("status.locked");
+        this.unlocked = plugin.getSettingsConfig().getColoredString("status.unlocked");
     }
 
     @Override
@@ -85,7 +90,16 @@ public class RealmWhoisCommand extends AbyssSubCommand<JewelsRealms> {
         replacer.addPlaceholder("%owner%", realm.getOwnerName());
         replacer.addPlaceholder("%description%", realm.getDescription());
         replacer.addPlaceholder("%members%", Color.parse(builder.toString()));
+        replacer.addPlaceholder("%status%", this.getFormattedStatus(realm.isOpen()));
 
         this.plugin.getMessageCache().sendMessage(player, "messages.realm-whois", replacer);
+    }
+
+    private String getFormattedStatus(final boolean status) {
+        if (status) {
+            return this.unlocked;
+        }
+
+        return this.locked;
     }
 }

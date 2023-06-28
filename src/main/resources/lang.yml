@@ -59,13 +59,84 @@ messages:
       value: "FIZZ"
       volume: 1
       pitch: 1
+  "realm-locked":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYour realm has been &nlocked&c to the public!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-unlocked":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aYour realm is &nunlocked&a to the public!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "already-locked":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYour realm is &nalready&c locked!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "already-unlocked":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYour realm is &nalready&c unlocked!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-not-vistable":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cThis realm is &nlocked&c to the public!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-visited":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aWelcome to &n%owner%'s&a realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
   "realm-whois":
     message:
       enabled: true
       value:
-        - "&aGang Owner: &f%owner%"
-        - "&aGang Descirption: &f%description%"
-        - "&aGang Members: &f%members%"
+        - "&aRealm Owner: &f%owner%"
+        - "&aRealm Descirption: &f%description%"
+        - "&aRealm Members: &f%members%"
+        - "&aRealm Visitation Status: %status%"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-description-changed":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aYour &arealm's &ndescription&a has been changed! View the new description on &n/realm&a &nwhois&a!"
     sound:
       enabled: true
       value: "FIZZ"
@@ -84,5 +155,7 @@ messages:
         - "&a/realm transfer (player)"
         - "&a/realm promote (player)"
         - "&a/realm demote (player)"
+        - "&a/realm lock"
+        - "&a/realm unlock"
         - "&a/realm leave"
         - "&a/realm delete"

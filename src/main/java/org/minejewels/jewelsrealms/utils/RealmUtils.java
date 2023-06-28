@@ -3,6 +3,7 @@ package org.minejewels.jewelsrealms.utils;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.minejewels.jewelsrealms.JewelsRealms;
+import org.minejewels.jewelsrealms.permission.RealmPermission;
 import org.minejewels.jewelsrealms.realm.Realm;
 
 import java.util.UUID;
@@ -84,5 +85,11 @@ public class RealmUtils {
         }
 
         return null;
+    }
+
+    public boolean hasPermission(final Realm realm, final Player player, final RealmPermission permission) {
+        if (realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) return true;
+        if (realm.getMembers().get(player.getUniqueId()).getPermissions().contains(RealmPermission.ALL)) return true;
+        return realm.getMembers().get(player.getUniqueId()).getPermissions().contains(permission);
     }
 }
