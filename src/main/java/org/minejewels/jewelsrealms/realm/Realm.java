@@ -27,7 +27,7 @@ public class Realm {
     private final Map<UUID, RealmRole> members = Maps.mutable.empty();
 
     private boolean open;
-    private String description;
+    private String description = "N/A";
 
     public Realm(final JewelsRealms plugin, final UUID owner) {
         this.owner = owner;

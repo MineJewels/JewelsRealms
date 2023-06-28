@@ -9,9 +9,29 @@ messages:
       value: "FIZZ"
       volume: 1
       pitch: 1
+  "no-realm-exists":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cThis entered realm does not exist!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "no-permission-realm":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou do not have &c&npermission&c to execute this!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
   "teleported-home":
     message:
-      enabled: false
+      enabled: true
       value:
         - "&a&l[!] &aYou were warped to &nyour&a realm! Welcome back!"
     sound:
@@ -23,9 +43,31 @@ messages:
     message:
       enabled: true
       value:
-        - "&a&l[!] &aYour realm was successfully created in &n%time%&ams! Do &n/realm&a for more information!"
+        - "&a&l[!] &aYour realm was successfully created in %time%ms! Do &n/realm&a for more information!"
     sound:
       enabled: false
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-deleted":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aYour realm was successfully deleted!"
+    sound:
+      enabled: false
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-whois":
+    message:
+      enabled: true
+      value:
+        - "&aGang Owner: &f%owner%"
+        - "&aGang Descirption: &f%description%"
+        - "&aGang Members: &f%members%"
+    sound:
+      enabled: true
       value: "FIZZ"
       volume: 1
       pitch: 1
@@ -42,4 +84,5 @@ messages:
         - "&a/realm transfer (player)"
         - "&a/realm promote (player)"
         - "&a/realm demote (player)"
+        - "&a/realm leave"
         - "&a/realm delete"

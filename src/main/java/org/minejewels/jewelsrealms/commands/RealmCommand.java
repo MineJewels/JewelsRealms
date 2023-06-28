@@ -7,7 +7,9 @@ import net.abyssdev.abysslib.utils.Utils;
 import org.bukkit.entity.Player;
 import org.eclipse.collections.api.factory.Lists;
 import org.minejewels.jewelsrealms.JewelsRealms;
+import org.minejewels.jewelsrealms.commands.subcommands.RealmDeleteCommand;
 import org.minejewels.jewelsrealms.commands.subcommands.RealmHomeCommand;
+import org.minejewels.jewelsrealms.commands.subcommands.RealmWhoisCommand;
 import org.minejewels.jewelsrealms.realm.Realm;
 
 public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
@@ -16,7 +18,10 @@ public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
         super(plugin, "realm", Player.class);
 
         this.setAliases(Lists.mutable.of("realm", "realms"));
-        this.register(new RealmHomeCommand(plugin));
+        this.register(
+                new RealmHomeCommand(plugin),
+                new RealmDeleteCommand(plugin),
+                new RealmWhoisCommand(plugin));
         this.register();
     }
 

@@ -61,6 +61,8 @@ public class RealmLoader {
 
     @SneakyThrows
     public void deleteRealm(final Realm realm) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "swm unload " + realm.getOwnerName() + "-" + realm.getId());
+        this.loader.unlockWorld(realm.getOwnerName() + "-" + realm.getId());
         this.loader.deleteWorld(realm.getOwnerName() + "-" + realm.getId());
     }
 

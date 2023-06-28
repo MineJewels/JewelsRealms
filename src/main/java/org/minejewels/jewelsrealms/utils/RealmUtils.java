@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.realm.Realm;
 
+import java.util.UUID;
+
 public class RealmUtils {
 
     private JewelsRealms plugin;
@@ -32,6 +34,31 @@ public class RealmUtils {
 
         for (Realm realm : this.plugin.getRealmStorage().allValues()) {
             if (!realm.getMembers().containsKey(player.getUniqueId())) continue;
+            return realm;
+        }
+
+        return null;
+    }
+
+    public boolean isInRealm(final UUID player) {
+
+        if (this.plugin.getRealmStorage().contains(player)) return true;
+
+        for (Realm realm : this.plugin.getRealmStorage().allValues()) {
+            if (!realm.getMembers().containsKey(player)) continue;
+            return true;
+        }
+
+        return false;
+    }
+
+    public Realm getRealm(final UUID player) {
+        if (!isInRealm(player)) return null;
+
+        if (this.plugin.getRealmStorage().contains(player)) return this.plugin.getRealmStorage().get(player);
+
+        for (Realm realm : this.plugin.getRealmStorage().allValues()) {
+            if (!realm.getMembers().containsKey(player)) continue;
             return realm;
         }
 
