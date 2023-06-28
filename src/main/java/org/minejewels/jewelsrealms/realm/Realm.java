@@ -79,11 +79,16 @@ public class Realm {
         return Bukkit.getWorld(this.getOwnerName() + "-" + this.getId());
     }
 
-    public void spawn(final Player player) {
+    public void spawn(final Player player, final JewelsRealms plugin) {
         final World world = this.adapt();
 
-        final Location spawnLocation = world.getSpawnLocation().add(0.5, 1, 0.5);
+        final Location playerSpawnLocation = new Location(
+                world,
+                plugin.getSettingsConfig().getInt("spawn-location.x") + 0.5,
+                plugin.getSettingsConfig().getInt("spawn-location.y") + 1,
+                plugin.getSettingsConfig().getInt("spawn-location.z") + 0.5
+        );
 
-        player.teleport(spawnLocation);
+        player.teleport(playerSpawnLocation);
     }
 }

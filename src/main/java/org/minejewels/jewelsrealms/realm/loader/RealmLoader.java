@@ -6,11 +6,16 @@ import com.infernalsuite.aswm.api.world.SlimeWorld;
 import com.infernalsuite.aswm.api.world.properties.SlimeProperties;
 import com.infernalsuite.aswm.api.world.properties.SlimePropertyMap;
 import lombok.SneakyThrows;
+import net.abyssdev.abysslib.fawe.FaweUtils;
+import net.abyssdev.abysslib.nms.NMSUtils;
+import net.abyssdev.abysslib.utils.file.Files;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.realm.Realm;
+
+import java.io.File;
 
 public class RealmLoader {
 
@@ -62,8 +67,7 @@ public class RealmLoader {
     @SneakyThrows
     public void deleteRealm(final Realm realm) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "swm unload " + realm.getOwnerName() + "-" + realm.getId());
-        this.loader.unlockWorld(realm.getOwnerName() + "-" + realm.getId());
-        this.loader.deleteWorld(realm.getOwnerName() + "-" + realm.getId());
+        this.deleteWorld(this.adapt(realm).getWorldFolder());
     }
 
     public World adapt(final SlimeWorld world) {
@@ -78,40 +82,48 @@ public class RealmLoader {
 
         final World world = this.adapt(realm);
 
-        final Location spawnLocation = world.getSpawnLocation().add(0.5, 1, 0.5);
+        final Location playerSpawnLocation = new Location(
+                world,
+                this.plugin.getSettingsConfig().getInt("spawn-location.x"),
+                this.plugin.getSettingsConfig().getInt("spawn-location.y"),
+                this.plugin.getSettingsConfig().getInt("spawn-location.z")
+        );
 
-        player.teleport(spawnLocation);
+        player.teleport(playerSpawnLocation);
     }
 
     public void createRealmProperties(final SlimeWorld slimeWorld, final Player player) {
         final World world = this.adapt(slimeWorld);
 
         final Location spawnLocation = world.getSpawnLocation().add(0.5, 0, 0.5);
+        final Location playerSpawnLocation = new Location(
+                world,
+                this.plugin.getSettingsConfig().getInt("spawn-location.x"),
+                this.plugin.getSettingsConfig().getInt("spawn-location.y"),
+                this.plugin.getSettingsConfig().getInt("spawn-location.z")
+        );
 
         WorldBorder border = world.getWorldBorder();
 
         border.setCenter(spawnLocation);
         border.setSize(100);
 
-        int radius = 5;
-        int layers = 5;
+        FaweUtils.get().pasteSchematic(spawnLocation, Files.file("realm.schem", plugin), true);
 
-        for (int i = 0; i < layers; i++) {
-            int layerRadius = radius - i;
+        player.teleport(playerSpawnLocation);
+    }
 
-            for (int x = -layerRadius + 1; x < layerRadius; x++) {
-                for (int z = -layerRadius + 1; z < layerRadius; z++) {
-                    Location blockLocation = spawnLocation.clone().add(x, -i, z);
-                    Block block = blockLocation.getBlock();
-                    if (i == layers - 1) {
-                        block.setType(Material.BEDROCK);
-                    } else {
-                        block.setType(Material.GRASS_BLOCK);
-                    }
+    private boolean deleteWorld(final File path) {
+        if(path.exists()) {
+            File files[] = path.listFiles();
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteWorld(files[i]);
+                } else {
+                    files[i].delete();
                 }
             }
         }
-
-        player.teleport(spawnLocation);
+        return(path.delete());
     }
 }

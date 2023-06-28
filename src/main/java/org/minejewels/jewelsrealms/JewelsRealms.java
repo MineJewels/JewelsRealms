@@ -23,6 +23,7 @@ public final class JewelsRealms extends AbyssPlugin {
 
     private RealmLoader realmLoader;
 
+    private final AbyssConfig settingsConfig = this.getAbyssConfig("settings");
     private final AbyssConfig langConfig = this.getAbyssConfig("lang");
     private final AbyssConfig rolesConfig = this.getAbyssConfig("roles");
 
