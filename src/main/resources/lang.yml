@@ -1,0 +1,45 @@
+messages:
+  "no-realm":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou do not have a &c&nrealm&c! Do /realm to continue!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "teleported-home":
+    message:
+      enabled: false
+      value:
+        - "&a&l[!] &aYou were warped to &nyour&a realm! Welcome back!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-created":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aYour realm was successfully created in &n%time%&ams! Do &n/realm&a for more information!"
+    sound:
+      enabled: false
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-help":
+    message:
+      enabled: true
+      value:
+        - "&a/realm home"
+        - "&a/realm description"
+        - "&a/realm invite (player)"
+        - "&a/realm kick (player)"
+        - "&a/realm visit (player)"
+        - "&a/realm whois (player)"
+        - "&a/realm transfer (player)"
+        - "&a/realm promote (player)"
+        - "&a/realm demote (player)"
+        - "&a/realm delete"

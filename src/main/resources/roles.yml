@@ -1,0 +1,31 @@
+roles:
+  "MEMBER":
+    weight: 1
+    permissions:
+      - "PLACE_BLOCKS"
+      - "BREAK_BLOCKS"
+      - "DROP_ITEMS"
+      - "PICKUP_ITEMS"
+  "MODERATOR":
+    weight: 2
+    permissions:
+      - "PLACE_BLOCKS"
+      - "BREAK_BLOCKS"
+      - "DROP_ITEMS"
+      - "PICKUP_ITEMS"
+      - "LOCK_REALM"
+      - "UNLOCK_REALM"
+  "ADMIN":
+    weight: 3
+    permissions:
+      - "PLACE_BLOCKS"
+      - "BREAK_BLOCKS"
+      - "DROP_ITEMS"
+      - "PICKUP_ITEMS"
+      - "LOCK_REALM"
+      - "UNLOCK_REALM"
+      - "KICK_MEMBERS"
+      - "INVITE_MEMBERS"
+      - "DEMOTE_MEMBERS"
+      - "PROMOTE_MEMBERS"
+      - "CHANGE_DESCRIPTION"

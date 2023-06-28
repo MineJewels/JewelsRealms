@@ -1,0 +1,7 @@
+name: JewelsRealms
+version: ${project.version}
+main: org.minejewels.jewelsrealms.JewelsRealms
+api-version: 1.19
+depend: [ AbyssLib, SlimeWorldManager ]
+authors: [ Consciences ]
+description: Enterprise generation system with preformance in mind.
