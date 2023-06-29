@@ -119,6 +119,46 @@ messages:
       value: "FIZZ"
       volume: 1
       pitch: 1
+  "cannot-leave":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou must &ntransfer&c or &ndelete&c the realm to leave!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "user-left":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &c%member% has &nleft&c this realm! Farewell!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "cannot-kick-members":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou are &nunable&c to kick this member from the realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "user-kicked":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &c%member% has been &nkicked&c from this realm! Farewell!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
   "teleported-home":
     message:
       enabled: true

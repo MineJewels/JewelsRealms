@@ -27,7 +27,9 @@ public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
                 new RealmSetWarpCommand(plugin),
                 new RealmSetSpawnCommand(plugin),
                 new RealmJoinCommand(plugin),
-                new RealmInviteCommand(plugin));
+                new RealmInviteCommand(plugin),
+                new RealmLeaveCommand(plugin),
+                new RealmKickCommand(plugin));
         this.register();
     }
 
