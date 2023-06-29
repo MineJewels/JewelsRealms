@@ -9,10 +9,10 @@ import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.permission.RealmPermission;
 import org.minejewels.jewelsrealms.realm.Realm;
 
-public class RealmKickCommand extends AbyssSubCommand<JewelsRealms> {
+public class RealmPromoteCommand extends AbyssSubCommand<JewelsRealms> {
 
-    public RealmKickCommand(JewelsRealms plugin) {
-        super(plugin, 0, Sets.immutable.of("kick"));
+    public RealmPromoteCommand(JewelsRealms plugin) {
+        super(plugin, 0, Sets.immutable.of("promote"));
     }
 
     @Override
@@ -38,20 +38,17 @@ public class RealmKickCommand extends AbyssSubCommand<JewelsRealms> {
 
         final Realm realm = this.plugin.getRealmUtils().getRealm(player.getUniqueId());
 
-        // Cannot-kick-members, user-kicked
-
-        if (!this.plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.KICK_MEMBERS)) {
+        if (!this.plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.PROMOTE_MEMBERS)) {
             this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
             return;
         }
 
-        if (!realm.getMembers().containsKey(target.getUniqueId()) || realm.getOwner().toString().equalsIgnoreCase(target.getUniqueId().toString())) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.cannot-kick-members");
+        if (!realm.getMembers().containsKey(target.getUniqueId())) {
+            this.plugin.getMessageCache().sendMessage(player, "messages.invalid-player");
             return;
         }
 
-        realm.sendTeamMessage(this.plugin.getMessageCache().getMessage("messages.user-kicked"), new PlaceholderReplacer().addPlaceholder("%member%", target.getName()));
-        realm.kickMember(target.getUniqueId());
+       realm.promoteMember(player, target.getUniqueId(), this.plugin);
 
     }
 }

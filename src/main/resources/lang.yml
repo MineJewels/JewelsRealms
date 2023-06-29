@@ -123,7 +123,7 @@ messages:
     message:
       enabled: true
       value:
-        - "&c&l[!] &cYou must &ntransfer&c or &ndelete&c the realm to leave!"
+        - "&c&l[!] &cYou must &ndelete&c the realm to leave!"
     sound:
       enabled: true
       value: "FIZZ"
@@ -372,7 +372,6 @@ messages:
         - "&a/realm kick (player)"
         - "&a/realm visit (player)"
         - "&a/realm whois (player)"
-        - "&a/realm transfer (player)"
         - "&a/realm promote (player)"
         - "&a/realm demote (player)"
         - "&a/realm join (player)"

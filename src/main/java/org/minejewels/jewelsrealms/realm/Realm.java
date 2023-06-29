@@ -116,9 +116,9 @@ public class Realm {
             return;
         }
 
-        final RealmRole nextRole = plugin.getRealmUtils().getNextRole(this.members.get(member));
+        final RealmRole previousRole = plugin.getRealmUtils().getPreviousRole(this.members.get(member));
 
-        if (this.members.get(member) == nextRole) {
+        if (this.members.get(member) == previousRole) {
             plugin.getMessageCache().sendMessage(promoter, "messages.already-bottom-rank");
             return;
         }
@@ -128,11 +128,11 @@ public class Realm {
             return;
         }
 
-        this.members.put(member, nextRole);
+        this.members.put(member, previousRole);
 
         this.sendTeamMessage(plugin.getMessageCache().getMessage("messages.user-demoted"), new PlaceholderReplacer()
                 .addPlaceholder("%player%", Bukkit.getOfflinePlayer(member).getName())
-                .addPlaceholder("%role%", nextRole.getName()));
+                .addPlaceholder("%role%", previousRole.getName()));
     }
 
     public World adapt() {

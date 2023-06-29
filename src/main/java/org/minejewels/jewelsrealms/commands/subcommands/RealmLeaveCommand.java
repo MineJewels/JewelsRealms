@@ -11,7 +11,7 @@ import org.minejewels.jewelsrealms.realm.Realm;
 public class RealmLeaveCommand extends AbyssSubCommand<JewelsRealms> {
 
     public RealmLeaveCommand(JewelsRealms plugin) {
-        super(plugin, 0, Sets.immutable.of("delete", "disband"));
+        super(plugin, 0, Sets.immutable.of("leave"));
     }
 
     @Override
