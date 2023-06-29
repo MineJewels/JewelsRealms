@@ -37,6 +37,10 @@ public class RealmInviteCommand extends AbyssSubCommand<JewelsRealms> {
 
         final Player target = context.asPlayer(0);
 
+        if (!target.isOnline()) {
+            this.plugin.getMessageCache().sendMessage(player, "messages.invalid-player");
+        }
+
         if (this.plugin.getRealmUtils().isInRealm(target.getUniqueId())) {
             this.plugin.getMessageCache().sendMessage(player, "messages.already-in-realm-others");
             return;
@@ -49,8 +53,6 @@ public class RealmInviteCommand extends AbyssSubCommand<JewelsRealms> {
             return;
         }
 
-        // invited-realm, invited-personal
-
         if (realm.getMembers().containsKey(target.getUniqueId()) || realm.getOwner().toString().equalsIgnoreCase(target.getUniqueId().toString())) {
             this.plugin.getMessageCache().sendMessage(player, "messages.cannot-reinvite-members");
             return;
@@ -61,7 +63,6 @@ public class RealmInviteCommand extends AbyssSubCommand<JewelsRealms> {
             return;
         }
 
-        this.plugin.getMessageCache().sendMessage(player, "messages.realm-visited", new PlaceholderReplacer().addPlaceholder("%owner%", realm.getOwnerName()));
         realm.inviteMember(target.getUniqueId());
 
         this.plugin.getMessageCache().sendMessage(target, "messages.invited-personal", new PlaceholderReplacer().addPlaceholder("%realm%", realm.getOwnerName()));

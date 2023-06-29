@@ -37,7 +37,7 @@ public class RealmDemoteCommand extends AbyssSubCommand<JewelsRealms> {
 
         final Realm realm = this.plugin.getRealmUtils().getRealm(player.getUniqueId());
 
-        if (!this.plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.PROMOTE_MEMBERS)) {
+        if (!this.plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.DEMOTE_MEMBERS)) {
             this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
             return;
         }
