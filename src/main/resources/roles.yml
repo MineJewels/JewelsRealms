@@ -6,6 +6,7 @@ roles:
       - "BREAK_BLOCKS"
       - "DROP_ITEMS"
       - "PICKUP_ITEMS"
+      - "INTERACT"
   "MODERATOR":
     weight: 2
     permissions:
@@ -15,6 +16,7 @@ roles:
       - "PICKUP_ITEMS"
       - "LOCK_REALM"
       - "UNLOCK_REALM"
+      - "INTERACT"
   "ADMIN":
     weight: 3
     permissions:
@@ -29,3 +31,6 @@ roles:
       - "DEMOTE_MEMBERS"
       - "PROMOTE_MEMBERS"
       - "CHANGE_DESCRIPTION"
+      - "SET_WARP"
+      - "SET_SPAWN"
+      - "INTERACT"

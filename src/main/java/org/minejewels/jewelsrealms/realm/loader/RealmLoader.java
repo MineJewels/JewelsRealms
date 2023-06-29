@@ -77,7 +77,7 @@ public class RealmLoader {
         return Bukkit.getWorld(realm.getOwnerName() + "-" + realm.getId());
     }
 
-    public void createRealmProperties(final SlimeWorld slimeWorld, final Player player) {
+    public void createRealmProperties(final SlimeWorld slimeWorld, final Player player, final Realm realm) {
         final World world = this.adapt(slimeWorld);
 
         final Location spawnLocation = world.getSpawnLocation().add(0.5, 0, 0.5);
@@ -94,6 +94,14 @@ public class RealmLoader {
         border.setSize(100);
 
         FaweUtils.get().pasteSchematic(spawnLocation, Files.file("realm.schem", plugin), true);
+
+        realm.setWarpX(playerSpawnLocation.getX());
+        realm.setWarpY(playerSpawnLocation.getY());
+        realm.setWarpZ(playerSpawnLocation.getZ());
+
+        realm.setSpawnX(playerSpawnLocation.getX());
+        realm.setSpawnY(playerSpawnLocation.getY());
+        realm.setSpawnZ(playerSpawnLocation.getZ());
 
         player.teleport(playerSpawnLocation);
     }

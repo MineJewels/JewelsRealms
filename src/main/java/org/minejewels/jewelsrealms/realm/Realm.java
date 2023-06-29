@@ -30,6 +30,8 @@ public class Realm {
 
     private boolean open = true;
     private String description = "N/A";
+    private double warpX, warpY, warpZ;
+    private double spawnX, spawnY, spawnZ;
 
     public Realm(final JewelsRealms plugin, final UUID owner) {
         this.owner = owner;
@@ -54,7 +56,7 @@ public class Realm {
 
         assert player != null;
 
-        plugin.getRealmLoader().createRealmProperties(plugin.getRealmLoader().loadRealm(this), player);
+        plugin.getRealmLoader().createRealmProperties(plugin.getRealmLoader().loadRealm(this), player, this);
     }
 
     public void deleteRealm(final JewelsRealms plugin) {
@@ -81,17 +83,30 @@ public class Realm {
         return Bukkit.getWorld(this.getOwnerName() + "-" + this.getId());
     }
 
-    public void spawn(final Player player, final JewelsRealms plugin) {
+    public void spawn(final Player player) {
         final World world = this.adapt();
 
         final Location playerSpawnLocation = new Location(
                 world,
-                plugin.getSettingsConfig().getInt("spawn-location.x") + 0.5,
-                plugin.getSettingsConfig().getInt("spawn-location.y") + 1,
-                plugin.getSettingsConfig().getInt("spawn-location.z") + 0.5
+                this.spawnX + 0.5,
+                this.spawnY + 1,
+                this.spawnZ + 0.5
         );
 
         player.teleport(playerSpawnLocation);
+    }
+
+    public void warp(final Player player) {
+        final World world = this.adapt();
+
+        final Location warpLocation = new Location(
+                world,
+                this.warpX + 0.5,
+                this.warpY + 1,
+                this.warpZ + 1
+        );
+
+        player.teleport(warpLocation);
     }
 
     public void sendTeamMessage(final Message message, final PlaceholderReplacer replacer) {

@@ -23,7 +23,7 @@ messages:
     message:
       enabled: true
       value:
-        - "&c&l[!] &cYou do not have &c&npermission&c to execute this!"
+        - "&c&l[!] &cYou do not have &c&npermission&c to do this on this realm!"
     sound:
       enabled: true
       value: "FIZZ"
@@ -109,6 +109,16 @@ messages:
       value: "FIZZ"
       volume: 1
       pitch: 1
+  "cannot-visit-yourself":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou cannot visit your &npersonal&c realm!!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
   "realm-visited":
     message:
       enabled: true
@@ -136,7 +146,27 @@ messages:
     message:
       enabled: true
       value:
-        - "&a&l[!] &aYour &arealm's &ndescription&a has been changed! View the new description on &n/realm&a &nwhois&a!"
+        - "&a&l[!] &aYour &nrealm's&a &ndescription&a has been changed! View the new description on &n/realm&a &nwhois&a!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-warp-updated":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aYou have successfully changed the realm's &nwarp&a location!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "realm-spawn-updated":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aYou have successfully changed the realm's &nspawn&a location!"
     sound:
       enabled: true
       value: "FIZZ"
@@ -155,7 +185,10 @@ messages:
         - "&a/realm transfer (player)"
         - "&a/realm promote (player)"
         - "&a/realm demote (player)"
+        - "&a/realm delete"
         - "&a/realm lock"
         - "&a/realm unlock"
         - "&a/realm leave"
         - "&a/realm delete"
+        - "&a/realm setwarp"
+        - "&a/realm setspawn"

@@ -4,6 +4,7 @@ public enum RealmPermission {
 
     PLACE_BLOCKS,
     BREAK_BLOCKS,
+    INTERACT,
     DROP_ITEMS,
     PICKUP_ITEMS,
     INVITE_MEMBERS,
@@ -14,6 +15,8 @@ public enum RealmPermission {
     UNLOCK_REALM,
     DELETE_REALM,
     CHANGE_DESCRIPTION,
+    SET_WARP,
+    SET_SPAWN,
     ALL;
 
     public static boolean exists(final String input) {

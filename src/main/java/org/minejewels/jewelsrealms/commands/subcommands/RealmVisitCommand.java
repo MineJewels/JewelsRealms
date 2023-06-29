@@ -44,12 +44,17 @@ public class RealmVisitCommand extends AbyssSubCommand<JewelsRealms> {
 
         final Realm realm = this.plugin.getRealmUtils().getRealm(target.getUniqueId());
 
+        if (realm.getMembers().containsKey(player.getUniqueId()) || realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) {
+            this.plugin.getMessageCache().sendMessage(player, "messages.cannot-visit-yourself");
+            return;
+        }
+
         if (!realm.isOpen()) {
             this.plugin.getMessageCache().sendMessage(player, "messages.realm-not-vistable");
             return;
         }
 
-        this.plugin.getMessageCache().sendMessage(player, "messages.realm-visited", new PlaceholderReplacer().addPlaceholder("%owner", realm.getOwnerName()));
-        realm.spawn(player, plugin);
+        this.plugin.getMessageCache().sendMessage(player, "messages.realm-visited", new PlaceholderReplacer().addPlaceholder("%owner%", realm.getOwnerName()));
+        realm.warp(player);
     }
 }

@@ -7,6 +7,7 @@ import net.abyssdev.abysslib.plugin.AbyssPlugin;
 import net.abyssdev.abysslib.storage.Storage;
 import net.abyssdev.abysslib.text.MessageCache;
 import org.minejewels.jewelsrealms.commands.RealmCommand;
+import org.minejewels.jewelsrealms.listeners.RealmListeners;
 import org.minejewels.jewelsrealms.realm.Realm;
 import org.minejewels.jewelsrealms.realm.loader.RealmLoader;
 import org.minejewels.jewelsrealms.realm.storage.RealmStorage;
@@ -48,6 +49,7 @@ public final class JewelsRealms extends AbyssPlugin {
         this.loadMessages(this.messageCache, this.langConfig);
 
         new RealmCommand(this);
+        new RealmListeners(this);
     }
 
     @Override

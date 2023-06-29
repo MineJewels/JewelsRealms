@@ -25,7 +25,7 @@ public class RealmHomeCommand extends AbyssSubCommand<JewelsRealms> {
 
         final Realm realm = this.plugin.getRealmUtils().getRealm(player);
 
-        realm.spawn(player, plugin);
+        realm.spawn(player);
 
         this.plugin.getMessageCache().sendMessage(player, "messages.teleported-home");
     }
