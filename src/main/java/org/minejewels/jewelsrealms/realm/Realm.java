@@ -3,9 +3,11 @@ package org.minejewels.jewelsrealms.realm;
 import com.infernalsuite.aswm.api.world.SlimeWorld;
 import lombok.Getter;
 import lombok.Setter;
+import net.abyssdev.abysslib.collections.entry.EntryTimeLimitSet;
 import net.abyssdev.abysslib.placeholder.PlaceholderReplacer;
 import net.abyssdev.abysslib.storage.id.Id;
 import net.abyssdev.abysslib.text.message.Message;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,7 +18,9 @@ import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.roles.RealmRole;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
@@ -33,6 +37,9 @@ public class Realm {
     private double warpX, warpY, warpZ;
     private double spawnX, spawnY, spawnZ;
 
+    @BsonIgnore
+    private final Set<UUID> invites;
+
     public Realm(final JewelsRealms plugin, final UUID owner) {
         this.owner = owner;
 
@@ -45,6 +52,8 @@ public class Realm {
         } else {
             this.ownerName = "null";
         }
+
+        this.invites = new EntryTimeLimitSet<>(TimeUnit.SECONDS, 60);
 
         this.loadRealm(plugin);
     }
@@ -64,19 +73,66 @@ public class Realm {
     }
 
     public void inviteMember(final UUID member) {
+        this.invites.add(member);
+    }
 
+    public void addMember(final UUID member, final JewelsRealms plugin) {
+        this.members.put(member, plugin.getRoleRegistry().get("MEMBER").get());
     }
 
     public void kickMember(final UUID member) {
         this.members.remove(member);
     }
 
-    public void promoteMember(final UUID member) {
+    public void promoteMember(final Player promoter, final UUID member, final JewelsRealms plugin) {
 
+        if (this.getOwner().toString().equalsIgnoreCase(member.toString())) {
+            plugin.getMessageCache().sendMessage(promoter, "messages.already-top-rank");
+            return;
+        }
+
+        final RealmRole nextRole = plugin.getRealmUtils().getNextRole(this.members.get(member));
+
+        if (this.members.get(member) == nextRole) {
+            plugin.getMessageCache().sendMessage(promoter, "messages.already-top-rank");
+            return;
+        }
+
+        if (promoter.getUniqueId().toString().equalsIgnoreCase(member.toString())) {
+            plugin.getMessageCache().sendMessage(promoter, "messages.cannot-promote-self");
+            return;
+        }
+
+        this.members.put(member, nextRole);
+
+        this.sendTeamMessage(plugin.getMessageCache().getMessage("messages.user-promoted"), new PlaceholderReplacer()
+            .addPlaceholder("%player%", Bukkit.getOfflinePlayer(member).getName())
+            .addPlaceholder("%role%", nextRole.getName()));
     }
 
-    public void demoteMember(final UUID member) {
+    public void demoteMember(final Player promoter, final UUID member, final JewelsRealms plugin) {
+        if (this.getOwner().toString().equalsIgnoreCase(member.toString())) {
+            plugin.getMessageCache().sendMessage(promoter, "messages.already-top-rank");
+            return;
+        }
 
+        final RealmRole nextRole = plugin.getRealmUtils().getNextRole(this.members.get(member));
+
+        if (this.members.get(member) == nextRole) {
+            plugin.getMessageCache().sendMessage(promoter, "messages.already-bottom-rank");
+            return;
+        }
+
+        if (promoter.getUniqueId().toString().equalsIgnoreCase(member.toString())) {
+            plugin.getMessageCache().sendMessage(promoter, "messages.cannot-demote-self");
+            return;
+        }
+
+        this.members.put(member, nextRole);
+
+        this.sendTeamMessage(plugin.getMessageCache().getMessage("messages.user-demoted"), new PlaceholderReplacer()
+                .addPlaceholder("%player%", Bukkit.getOfflinePlayer(member).getName())
+                .addPlaceholder("%role%", nextRole.getName()));
     }
 
     public World adapt() {

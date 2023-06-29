@@ -29,6 +29,96 @@ messages:
       value: "FIZZ"
       volume: 1
       pitch: 1
+  "already-invited":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cThis user was already &ninvited&c to this realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "invited-personal":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &aYou were invited to a realm! To accept, do &n/realm&a &njoin&a &n%realm%&a!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "invited-realm":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &a%member% was &ninvited&a to the realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "already-top-rank":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cThis user is &nalready&c the top rank!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "already-bottom-rank":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cThis user is &nalready&c the lowest rank!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "cannot-promote-self":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou cannot &npromote&c yourself!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "cannot-demote-self":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou cannot &ndemote&c yourself!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "user-promoted":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &a%player% was &npromoted&a to %role% rank!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "user-demoted":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &c%player% was &ndemoted&c to %role% rank!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
   "teleported-home":
     message:
       enabled: true
@@ -113,7 +203,67 @@ messages:
     message:
       enabled: true
       value:
-        - "&c&l[!] &cYou cannot visit your &npersonal&c realm!!"
+        - "&c&l[!] &cYou cannot visit your &npersonal&c realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "cannot-reinvite-members":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cThis user is &nalready&c in this realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "cannot-join-yourself":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou cannot join your &npersonal&c realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "already-in-realm":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou cannot join a realm while your &nalready&c in one!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "already-in-realm-others":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cThis player is &nalready&c in a realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "no-invite":
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou were not &ninvited&c to this realm!"
+    sound:
+      enabled: true
+      value: "FIZZ"
+      volume: 1
+      pitch: 1
+  "joined":
+    message:
+      enabled: true
+      value:
+        - "&a&l[!] &a%member% has &njoined&a your realm!"
     sound:
       enabled: true
       value: "FIZZ"
@@ -185,6 +335,7 @@ messages:
         - "&a/realm transfer (player)"
         - "&a/realm promote (player)"
         - "&a/realm demote (player)"
+        - "&a/realm join (player)"
         - "&a/realm delete"
         - "&a/realm lock"
         - "&a/realm unlock"

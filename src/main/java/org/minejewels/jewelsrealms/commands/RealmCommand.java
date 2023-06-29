@@ -25,7 +25,9 @@ public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
                 new RealmUnlockCommand(plugin),
                 new RealmVisitCommand(plugin),
                 new RealmSetWarpCommand(plugin),
-                new RealmSetSpawnCommand(plugin));
+                new RealmSetSpawnCommand(plugin),
+                new RealmJoinCommand(plugin),
+                new RealmInviteCommand(plugin));
         this.register();
     }
 
@@ -34,7 +36,7 @@ public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
 
         final Player player = context.getSender();
 
-        if (this.plugin.getRealmStorage().contains(player.getUniqueId())) {
+        if (this.plugin.getRealmUtils().isInRealm(player.getUniqueId())) {
             this.plugin.getMessageCache().sendMessage(player, "messages.realm-help");
             return;
         }

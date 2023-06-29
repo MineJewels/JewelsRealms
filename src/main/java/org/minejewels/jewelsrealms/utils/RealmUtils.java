@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.permission.RealmPermission;
 import org.minejewels.jewelsrealms.realm.Realm;
+import org.minejewels.jewelsrealms.roles.RealmRole;
 
 import java.util.UUID;
 
@@ -91,5 +92,29 @@ public class RealmUtils {
         if (realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) return true;
         if (realm.getMembers().get(player.getUniqueId()).getPermissions().contains(RealmPermission.ALL)) return true;
         return realm.getMembers().get(player.getUniqueId()).getPermissions().contains(permission);
+    }
+
+    public RealmRole getNextRole(final RealmRole previousRole) {
+
+        final int oldWeight = previousRole.getWeight();
+
+        for (final RealmRole role : this.plugin.getRoleRegistry().values()) {
+            if (oldWeight+1 != role.getWeight()) continue;
+            return role;
+        }
+
+        return previousRole;
+    }
+
+    public RealmRole getPreviousRole(final RealmRole currentRole) {
+
+        final int oldWeight = currentRole.getWeight();
+
+        for (final RealmRole role : this.plugin.getRoleRegistry().values()) {
+            if (oldWeight-1 != role.getWeight()) continue;
+            return role;
+        }
+
+        return currentRole;
     }
 }
