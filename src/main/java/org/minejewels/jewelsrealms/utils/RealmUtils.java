@@ -1,12 +1,16 @@
 package org.minejewels.jewelsrealms.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.eclipse.collections.api.factory.Lists;
 import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.permission.RealmPermission;
 import org.minejewels.jewelsrealms.realm.Realm;
 import org.minejewels.jewelsrealms.roles.RealmRole;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RealmUtils {
@@ -116,5 +120,25 @@ public class RealmUtils {
         }
 
         return currentRole;
+    }
+
+    public List<Player> getPlayersOnRealm(final Realm realm) {
+        final World world = this.plugin.getRealmLoader().adapt(realm);
+
+        return world.getPlayers();
+    }
+
+    public List<Player> getMembersOnRealm(final Realm realm) {
+
+        final List<Player> members = Lists.mutable.empty();
+
+        members.add(Bukkit.getPlayer(realm.getOwner()));
+
+        for (final Player player : this.getPlayersOnRealm(realm)) {
+            if (!realm.getMembers().containsKey(player.getUniqueId())) continue;
+            members.add(player);
+        }
+
+        return members;
     }
 }
