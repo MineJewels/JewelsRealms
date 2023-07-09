@@ -4,10 +4,13 @@ import net.abyssdev.abysslib.command.AbyssCommand;
 import net.abyssdev.abysslib.command.context.CommandContext;
 import net.abyssdev.abysslib.placeholder.PlaceholderReplacer;
 import net.abyssdev.abysslib.utils.Utils;
+import net.abyssdev.me.lucko.helper.Events;
 import org.bukkit.entity.Player;
 import org.eclipse.collections.api.factory.Lists;
 import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.commands.subcommands.*;
+import org.minejewels.jewelsrealms.events.RealmCreateEvent;
+import org.minejewels.jewelsrealms.events.RealmDeleteEvent;
 import org.minejewels.jewelsrealms.realm.Realm;
 
 public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
@@ -58,5 +61,9 @@ public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
                 .addPlaceholder("%time%", Utils.format(executionTime));
 
         this.plugin.getMessageCache().sendMessage(player, "messages.realm-created", replacer);
+
+        final RealmCreateEvent createEvent = new RealmCreateEvent(player, realm);
+
+        Events.call(createEvent);
     }
 }

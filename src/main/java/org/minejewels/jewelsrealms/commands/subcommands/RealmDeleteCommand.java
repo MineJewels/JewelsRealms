@@ -2,10 +2,13 @@ package org.minejewels.jewelsrealms.commands.subcommands;
 
 import net.abyssdev.abysslib.command.AbyssSubCommand;
 import net.abyssdev.abysslib.command.context.CommandContext;
+import net.abyssdev.me.lucko.helper.Events;
 import org.bukkit.entity.Player;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.minejewels.jewelsrealms.JewelsRealms;
+import org.minejewels.jewelsrealms.events.RealmDeleteEvent;
+import org.minejewels.jewelsrealms.events.RealmInteractEvent;
 import org.minejewels.jewelsrealms.realm.Realm;
 
 public class RealmDeleteCommand extends AbyssSubCommand<JewelsRealms> {
@@ -28,6 +31,14 @@ public class RealmDeleteCommand extends AbyssSubCommand<JewelsRealms> {
 
         if (!realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) {
             this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            return;
+        }
+
+        final RealmDeleteEvent deleteEvent = new RealmDeleteEvent(player, realm);
+
+        Events.call(deleteEvent);
+
+        if (deleteEvent.isCancelled()) {
             return;
         }
 

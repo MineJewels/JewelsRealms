@@ -1,6 +1,7 @@
 package org.minejewels.jewelsrealms.listeners;
 
 import net.abyssdev.abysslib.listener.AbyssListener;
+import net.abyssdev.me.lucko.helper.Events;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +11,9 @@ import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.minejewels.jewelsrealms.JewelsRealms;
+import org.minejewels.jewelsrealms.events.RealmBreakEvent;
+import org.minejewels.jewelsrealms.events.RealmInteractEvent;
+import org.minejewels.jewelsrealms.events.RealmPlaceEvent;
 import org.minejewels.jewelsrealms.permission.RealmPermission;
 import org.minejewels.jewelsrealms.realm.Realm;
 
@@ -43,6 +47,15 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
             return;
         }
 
+        final RealmBreakEvent breakEvent = new RealmBreakEvent(event, player, realm);
+
+        Events.call(breakEvent);
+
+        if (breakEvent.isCancelled()) {
+            event.setCancelled(true);
+            return;
+        }
+
 
         event.setCancelled(false);
     }
@@ -71,6 +84,15 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
             return;
         }
 
+        final RealmPlaceEvent placeEvent = new RealmPlaceEvent(event, player, realm);
+
+        Events.call(placeEvent);
+
+        if (placeEvent.isCancelled()) {
+            event.setCancelled(true);
+            return;
+        }
+
 
         event.setCancelled(false);
     }
@@ -95,6 +117,15 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
 
         if (!plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.INTERACT)) {
             this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            event.setCancelled(true);
+            return;
+        }
+
+        final RealmInteractEvent interactEvent = new RealmInteractEvent(event, player, realm);
+
+        Events.call(interactEvent);
+
+        if (interactEvent.isCancelled()) {
             event.setCancelled(true);
             return;
         }
