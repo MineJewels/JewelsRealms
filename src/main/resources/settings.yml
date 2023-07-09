@@ -6,3 +6,11 @@ spawn-location:
 status:
   locked: "&c&lLOCKED"
   unlocked: "&a&lUNLOCKED"
+
+deletion-location:
+  world: "Spawn"
+  x: 0
+  y: 135
+  z: 0
+  yaw: 90.0
+  pitch: 0.0

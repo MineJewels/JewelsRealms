@@ -74,14 +74,14 @@
         <dependency>
             <groupId>me.consciences</groupId>
             <artifactId>AbyssLib</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/libs/AbyssLib.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.consciences</groupId>
             <artifactId>ASWM</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/libs/api-1.20-R0.1-SNAPSHOT (1).jar</systemPath>
         </dependency>

@@ -38,7 +38,7 @@ public class Realm {
     private double spawnX, spawnY, spawnZ;
 
     @BsonIgnore
-    private final Set<UUID> invites;
+    private transient final Set<UUID> invites;
 
     public Realm(final JewelsRealms plugin, final UUID owner) {
         this.owner = owner;

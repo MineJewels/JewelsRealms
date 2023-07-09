@@ -1,21 +1,24 @@
 package org.minejewels.jewelsrealms.realm.loader;
 
 import com.infernalsuite.aswm.api.SlimePlugin;
+import com.infernalsuite.aswm.api.exceptions.UnknownWorldException;
 import com.infernalsuite.aswm.api.loaders.SlimeLoader;
 import com.infernalsuite.aswm.api.world.SlimeWorld;
 import com.infernalsuite.aswm.api.world.properties.SlimeProperties;
 import com.infernalsuite.aswm.api.world.properties.SlimePropertyMap;
 import lombok.SneakyThrows;
 import net.abyssdev.abysslib.fawe.FaweUtils;
-import net.abyssdev.abysslib.nms.NMSUtils;
 import net.abyssdev.abysslib.utils.file.Files;
-import org.bukkit.*;
-import org.bukkit.block.Block;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.realm.Realm;
 
 import java.io.File;
+import java.io.IOException;
 
 public class RealmLoader {
 
@@ -64,9 +67,30 @@ public class RealmLoader {
         return this.slimePlugin.loadWorld(world);
     }
 
-    @SneakyThrows
     public void deleteRealm(final Realm realm) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "swm unload " + realm.getOwnerName() + "-" + realm.getId());
+
+        final World world = this.adapt(realm);
+
+        for (final Player player : world.getPlayers()) {
+            player.teleport(new Location(
+                    Bukkit.getWorld(this.plugin.getSettingsConfig().getString("deletion-location.world")),
+                    this.plugin.getSettingsConfig().getInt("deletion-location.x") + 0.5,
+                    this.plugin.getSettingsConfig().getInt("deletion-location.y"),
+                    this.plugin.getSettingsConfig().getInt("deletion-location.z") + 0.5,
+                    this.plugin.getSettingsConfig().getInt("deletion-location.yaw"),
+                    this.plugin.getSettingsConfig().getInt("deletion-location.pitch")
+            ));
+        }
+        if (Bukkit.unloadWorld(realm.getOwnerName() + "-" + realm.getId(), false)) {
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                try {
+                    this.loader.deleteWorld(realm.getOwnerName() + "-" + realm.getId());
+                    System.out.println("true");
+                } catch (UnknownWorldException | IOException exception) {
+                    throw new RuntimeException(exception);
+                }
+            });
+        }
     }
 
     public World adapt(final SlimeWorld world) {
