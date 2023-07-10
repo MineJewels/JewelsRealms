@@ -91,5 +91,20 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.intellectualsites</groupId>
+            <artifactId>FAWE-Modern</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/Modern.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.intellectualsites</groupId>
+            <artifactId>WE-Modern</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/worldedit-bukkit-7.2.10.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>

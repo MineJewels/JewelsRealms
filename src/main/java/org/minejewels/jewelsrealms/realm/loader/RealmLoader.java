@@ -7,7 +7,6 @@ import com.infernalsuite.aswm.api.world.SlimeWorld;
 import com.infernalsuite.aswm.api.world.properties.SlimeProperties;
 import com.infernalsuite.aswm.api.world.properties.SlimePropertyMap;
 import lombok.SneakyThrows;
-import net.abyssdev.abysslib.fawe.FaweUtils;
 import net.abyssdev.abysslib.utils.file.Files;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,6 +15,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 import org.minejewels.jewelsrealms.JewelsRealms;
 import org.minejewels.jewelsrealms.realm.Realm;
+import org.minejewels.jewelsrealms.utils.FaweUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,7 +117,7 @@ public class RealmLoader {
         border.setCenter(spawnLocation);
         border.setSize(100);
 
-        FaweUtils.get().pasteSchematic(spawnLocation, Files.file("realm.schem", plugin), true);
+        FaweUtils.pasteSchematic(spawnLocation, Files.file("realm.schem", plugin), true);
 
         realm.setWarpX(playerSpawnLocation.getX());
         realm.setWarpY(playerSpawnLocation.getY());
