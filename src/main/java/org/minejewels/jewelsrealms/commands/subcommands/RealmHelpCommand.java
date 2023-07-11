@@ -10,7 +10,7 @@ import org.minejewels.jewelsrealms.realm.Realm;
 public class RealmHelpCommand extends AbyssSubCommand<JewelsRealms> {
 
     public RealmHelpCommand(final JewelsRealms plugin) {
-        super(plugin, 0, Sets.immutable.of("home", "go"));
+        super(plugin, 0, Sets.immutable.of("help", "?"));
     }
 
     @Override

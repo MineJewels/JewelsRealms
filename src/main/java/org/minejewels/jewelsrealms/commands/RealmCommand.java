@@ -46,6 +46,8 @@ public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
 
         if (this.plugin.getRealmUtils().isInRealm(player.getUniqueId())) {
             this.plugin.getRealmUtils().getRealm(player.getUniqueId()).spawn(player);
+
+            this.plugin.getMessageCache().sendMessage(player, "messages.teleported-home");
             return;
         }
 
