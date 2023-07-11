@@ -34,6 +34,7 @@ public class RealmCommand extends AbyssCommand<JewelsRealms, Player> {
                 new RealmLeaveCommand(plugin),
                 new RealmKickCommand(plugin),
                 new RealmPromoteCommand(plugin),
+                new RealmHelpCommand(plugin),
                 new RealmDemoteCommand(plugin));
         this.register();
     }
