@@ -49,7 +49,7 @@ public class RealmVisitCommand extends AbyssSubCommand<JewelsRealms> {
             return;
         }
 
-        if (!realm.isOpen()) {
+        if (!realm.isOpen() && !player.hasPermission("realm.admin")) {
             this.plugin.getMessageCache().sendMessage(player, "messages.realm-not-vistable");
             return;
         }

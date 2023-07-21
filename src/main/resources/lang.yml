@@ -382,3 +382,8 @@ messages:
         - "&a/realm delete"
         - "&a/realm setwarp"
         - "&a/realm setspawn"
+  max-size:
+    message:
+      enabled: true
+      value:
+        - "&c&l[!] &cYou have hit the max invite limit!"

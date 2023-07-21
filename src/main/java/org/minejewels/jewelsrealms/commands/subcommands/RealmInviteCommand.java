@@ -12,8 +12,12 @@ import org.minejewels.jewelsrealms.realm.Realm;
 
 public class RealmInviteCommand extends AbyssSubCommand<JewelsRealms> {
 
+    private final int maxInviteLimit;
+
     public RealmInviteCommand(JewelsRealms plugin) {
         super(plugin, 0, Sets.immutable.of("invite"));
+
+        this.maxInviteLimit = plugin.getSettingsConfig().getInt("max-invite-limit");
     }
 
     @Override
@@ -48,7 +52,11 @@ public class RealmInviteCommand extends AbyssSubCommand<JewelsRealms> {
 
         final Realm realm = this.plugin.getRealmUtils().getRealm(player.getUniqueId());
 
-        if (!this.plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.LOCK_REALM)) {
+        if (realm.getMembers().size()+1 <= this.maxInviteLimit) {
+            return;
+        }
+
+        if (!this.plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.INVITE_MEMBERS)) {
             this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
             return;
         }
@@ -67,6 +75,5 @@ public class RealmInviteCommand extends AbyssSubCommand<JewelsRealms> {
 
         this.plugin.getMessageCache().sendMessage(target, "messages.invited-personal", new PlaceholderReplacer().addPlaceholder("%realm%", realm.getOwnerName()));
         realm.sendTeamMessage(this.plugin.getMessageCache().getMessage("messages.invited-realm"), new PlaceholderReplacer().addPlaceholder("%member%", target.getName()));
-
     }
 }

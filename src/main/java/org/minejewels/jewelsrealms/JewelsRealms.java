@@ -6,6 +6,8 @@ import net.abyssdev.abysslib.patterns.registry.Registry;
 import net.abyssdev.abysslib.plugin.AbyssPlugin;
 import net.abyssdev.abysslib.storage.Storage;
 import net.abyssdev.abysslib.text.MessageCache;
+import net.abyssdev.me.lucko.helper.Events;
+import org.bukkit.event.world.WorldLoadEvent;
 import org.minejewels.jewelsrealms.commands.RealmCommand;
 import org.minejewels.jewelsrealms.listeners.RealmListeners;
 import org.minejewels.jewelsrealms.realm.Realm;
@@ -75,6 +77,10 @@ public final class JewelsRealms extends AbyssPlugin {
     private void loadRealms() {
         for (Realm realm : this.realmStorage.allValues()) {
             this.realmLoader.loadRealm(realm);
+
+            final WorldLoadEvent event = new WorldLoadEvent(this.realmLoader.adapt(realm));
+
+            Events.call(event);
         }
 
         this.setLatestRealmID(this.realmStorage.allKeys().size());
