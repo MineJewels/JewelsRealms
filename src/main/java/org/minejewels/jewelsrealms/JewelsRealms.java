@@ -7,6 +7,8 @@ import net.abyssdev.abysslib.plugin.AbyssPlugin;
 import net.abyssdev.abysslib.storage.Storage;
 import net.abyssdev.abysslib.text.MessageCache;
 import net.abyssdev.me.lucko.helper.Events;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.minejewels.jewelsrealms.commands.RealmCommand;
 import org.minejewels.jewelsrealms.listeners.RealmListeners;
@@ -81,6 +83,13 @@ public final class JewelsRealms extends AbyssPlugin {
             final WorldLoadEvent event = new WorldLoadEvent(this.realmLoader.adapt(realm));
 
             Events.call(event);
+
+            final World bukkitWorld = this.realmLoader.adapt(realm);
+
+            WorldBorder border = bukkitWorld.getWorldBorder();
+
+            border.setCenter(bukkitWorld.getSpawnLocation());
+            border.setSize(100);
         }
 
         this.setLatestRealmID(this.realmStorage.allKeys().size());

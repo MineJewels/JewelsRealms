@@ -66,15 +66,6 @@ public class RealmLoader {
                 map
         );
 
-        this.loader.unlockWorld(name);
-
-        final World bukkitWorld = this.adapt(realm);
-
-        WorldBorder border = bukkitWorld.getWorldBorder();
-
-        border.setCenter(bukkitWorld.getSpawnLocation());
-        border.setSize(100);
-
         return this.slimePlugin.loadWorld(world);
     }
 

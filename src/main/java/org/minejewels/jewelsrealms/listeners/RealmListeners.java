@@ -47,13 +47,19 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
         final Realm realm = this.plugin.getRealmUtils().getRealm(location.getWorld());
 
         if (!realm.getMembers().containsKey(player.getUniqueId()) && !realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
             event.setCancelled(true);
             return;
         }
 
         if (!plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.BREAK_BLOCKS)) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
             event.setCancelled(true);
             return;
         }
@@ -84,13 +90,19 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
         final Realm realm = this.plugin.getRealmUtils().getRealm(location.getWorld());
 
         if (!realm.getMembers().containsKey(player.getUniqueId()) && !realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
             event.setCancelled(true);
             return;
         }
 
         if (!plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.PLACE_BLOCKS)) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
             event.setCancelled(true);
             return;
         }
@@ -121,13 +133,20 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
         final Realm realm = this.plugin.getRealmUtils().getRealm(location.getWorld());
 
         if (!realm.getMembers().containsKey(player.getUniqueId()) && !realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
             event.setCancelled(true);
             return;
         }
 
         if (!plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.INTERACT)) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
+
             event.setCancelled(true);
             return;
         }
@@ -196,14 +215,22 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
         final Realm realm = this.plugin.getRealmUtils().getRealm(location.getWorld());
 
         if (!realm.getMembers().containsKey(player.getUniqueId()) && !realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
             event.setCancelled(true);
+
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
             return;
         }
 
         if (!plugin.getRealmUtils().hasPermission(realm, player, RealmPermission.DROP_ITEMS)) {
-            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
             event.setCancelled(true);
+
+            if (!this.cooldownPlayer.contains(player)) {
+                this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+                this.cooldownPlayer.add(player);
+            }
             return;
         }
 
@@ -224,7 +251,10 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
             return;
         }
 
-        this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+        if (!this.cooldownPlayer.contains(player)) {
+            this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
+            this.cooldownPlayer.add(player);
+        }
 
         event.setCancelled(false);
     }
