@@ -52,7 +52,7 @@ public class RealmInviteCommand extends AbyssSubCommand<JewelsRealms> {
 
         final Realm realm = this.plugin.getRealmUtils().getRealm(player.getUniqueId());
 
-        if (realm.getMembers().size()+1 <= this.maxInviteLimit) {
+        if (realm.getMembers().size()+1 >= this.maxInviteLimit) {
             return;
         }
 

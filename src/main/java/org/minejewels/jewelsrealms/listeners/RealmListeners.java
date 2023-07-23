@@ -46,6 +46,17 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
 
         final Realm realm = this.plugin.getRealmUtils().getRealm(location.getWorld());
 
+
+        final RealmBreakEvent breakEvent = new RealmBreakEvent(event, player, realm);
+
+        Events.call(breakEvent);
+
+        if (breakEvent.isCancelled()) {
+            event.setCancelled(true);
+            return;
+        }
+
+
         if (!realm.getMembers().containsKey(player.getUniqueId()) && !realm.getOwner().toString().equalsIgnoreCase(player.getUniqueId().toString())) {
             if (!this.cooldownPlayer.contains(player)) {
                 this.plugin.getMessageCache().sendMessage(player, "messages.no-permission-realm");
@@ -63,16 +74,6 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
             event.setCancelled(true);
             return;
         }
-
-        final RealmBreakEvent breakEvent = new RealmBreakEvent(event, player, realm);
-
-        Events.call(breakEvent);
-
-        if (breakEvent.isCancelled()) {
-            event.setCancelled(true);
-            return;
-        }
-
 
         event.setCancelled(false);
     }
@@ -256,6 +257,6 @@ public class RealmListeners extends AbyssListener<JewelsRealms> {
             this.cooldownPlayer.add(player);
         }
 
-        event.setCancelled(false);
+        event.setCancelled(true);
     }
 }
